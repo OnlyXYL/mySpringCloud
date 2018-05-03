@@ -3,6 +3,7 @@ package xyl.bmsmart.service_neo4j.service_neo4j.service.Impl.neo4j;
 import lombok.extern.slf4j.Slf4j;
 import org.neo4j.driver.v1.Record;
 import org.springframework.stereotype.Service;
+import xyl.bmsmart.common.common.model.neo4j.Node;
 import xyl.bmsmart.common.common.model.neo4j.ResultData;
 import xyl.bmsmart.common.common.util.CypherResultUtil;
 import xyl.bmsmart.service_neo4j.service_neo4j.dao.neo4j.CityAndTypeDao;

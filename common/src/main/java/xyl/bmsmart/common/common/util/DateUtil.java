@@ -183,10 +183,4 @@ public class DateUtil {
 
         return dateStr;
     }
-
-    public static void main(String[] args) {
-        System.out.println(getTimeMs());
-
-    }
-
 }

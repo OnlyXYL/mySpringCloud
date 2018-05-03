@@ -2,6 +2,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://192.168.1.115:8761/eureka/
+
+  # 这只为prefer ip的话可以直接展示ip地址
+  instance:
+    prefer-ip-address: true
+
 server:
   port: 8765
 spring:

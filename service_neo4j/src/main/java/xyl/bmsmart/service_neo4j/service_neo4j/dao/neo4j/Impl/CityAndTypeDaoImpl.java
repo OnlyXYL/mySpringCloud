@@ -9,6 +9,7 @@ import xyl.bmsmart.service_neo4j.service_neo4j.dao.neo4j.CityAndTypeDao;
 import javax.annotation.Resource;
 import java.util.List;
 
+
 @Repository
 @Slf4j
 public class CityAndTypeDaoImpl implements CityAndTypeDao {

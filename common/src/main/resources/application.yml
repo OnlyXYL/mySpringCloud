@@ -3,3 +3,7 @@
 #spring:
 #  application:
 #    name: server_common
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/

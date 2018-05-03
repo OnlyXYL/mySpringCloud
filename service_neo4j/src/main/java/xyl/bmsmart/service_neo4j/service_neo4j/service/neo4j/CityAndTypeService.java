@@ -1,6 +1,7 @@
 package xyl.bmsmart.service_neo4j.service_neo4j.service.neo4j;
 
 
+import xyl.bmsmart.common.common.model.neo4j.Node;
 import xyl.bmsmart.common.common.model.neo4j.ResultData;
 
 public interface CityAndTypeService {
@@ -16,5 +17,5 @@ public interface CityAndTypeService {
      * @author XiaYaLing
      * @date 2018/4/26
      */
-    ResultData queryAllData(String label, String condition, boolean isDirection, String level);
+   ResultData queryAllData(String label, String condition, boolean isDirection, String level);
 }

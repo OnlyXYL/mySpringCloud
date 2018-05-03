@@ -21,8 +21,8 @@ public class CypherResultUtil {
      * @author XiaYaLing
      * @date 2018/4/18
      */
-    public static ResultData dealwithResult(List<Record> greeting) {
-        ArrayList<xyl.bmsmart.common.common.model.neo4j.Node > nodes = new ArrayList<>();
+    public static ResultData  dealwithResult(List<Record> greeting) {
+        ArrayList<xyl.bmsmart.common.common.model.neo4j.Node> nodes = new ArrayList<>();
         List<Relationship> edges = new ArrayList<>();
         List<String> relationShips = new ArrayList<>();
         ResultData resultData = new ResultData();
@@ -39,7 +39,7 @@ public class CypherResultUtil {
                         //节点
                         Node node = value.asNode();
                         long id = node.id();
-                        xyl.bmsmart.common.common.model.neo4j.Node  node1 = new xyl.bmsmart.common.common.model.neo4j.Node ();
+                        xyl.bmsmart.common.common.model.neo4j.Node node1 = new xyl.bmsmart.common.common.model.neo4j.Node();
                         //判断节点标签类型
                         Iterable<String> labels = node.labels();
                         for (Iterator<String> iterator = labels.iterator(); iterator.hasNext(); ) {

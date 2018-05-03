@@ -4,6 +4,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import xyl.bmsmart.common.common.model.neo4j.Node;
 import xyl.bmsmart.common.common.model.neo4j.ResultData;
 import xyl.bmsmart.service_ribbon.service.Neo4jService;
 
@@ -27,11 +28,12 @@ public class Neo4JServiceImpl implements Neo4jService {
 
     @HystrixCommand(fallbackMethod = "someThingError")
     @Override
-    public ResultData getNeo4jData() {
-        return restTemplate.getForObject("http://service-neo4j/allData/", ResultData.class);
+    public String getNeo4jData() {
+        return restTemplate.getForObject("http://service-neo4j/allData/", String.class);
     }
 
     public String someThingError() {
-        return "something wrong!";
+        log.info("something wrong in ribbon!!!");
+        return null;
     }
 }

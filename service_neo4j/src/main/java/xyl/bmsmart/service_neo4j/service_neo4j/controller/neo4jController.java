@@ -1,7 +1,6 @@
 package xyl.bmsmart.service_neo4j.service_neo4j.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +25,7 @@ public class neo4jController {
      * @date 2018/4/26
      */
     @RequestMapping(value = "/allData", method = RequestMethod.GET)
-    public ResultData getAllData() {
+    public String getAllData() {
 
         log.info(":::inter " + this.getClass().getName() + ":::方法:::" + Thread.currentThread().getStackTrace()[1].getMethodName() + ":::参数:::");
 
@@ -34,8 +33,7 @@ public class neo4jController {
 
         System.out.println(resultData);
 
-        return resultData;
+        return resultData.toString();
     }
-
 
 }
