@@ -1,0 +1,18 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.1.115:8761/eureka/
+server:
+  port: 8765
+spring:
+  application:
+    name: service-feign
+
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream,info,health

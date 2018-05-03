@@ -1,0 +1,19 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.115:8761/eureka/
+server:
+  port: 8888
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: config-8888
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://10.0.47.78/XiaYaLing/SpringCloudConfig.git
+          search-paths: /
+      label: master

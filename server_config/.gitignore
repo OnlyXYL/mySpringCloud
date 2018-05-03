@@ -1,0 +1,6 @@
+### IntelliJ IDEA ###
+.idea/*
+.settings/*
+*.iml
+.classpath
+**/target/*

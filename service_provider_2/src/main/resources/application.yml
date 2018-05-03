@@ -1,0 +1,9 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.115:8761/eureka/
+server:
+  port: 8763
+spring:
+  application:
+    name: service-8762
