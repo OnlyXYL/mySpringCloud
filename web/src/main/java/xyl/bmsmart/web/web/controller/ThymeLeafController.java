@@ -43,7 +43,7 @@ public class ThymeLeafController {
     @RequestMapping(value = "/page/neo4j")
     public String getPage(){
 
-        return "neo4j";
+        return "neo4j1";
     }
 
     @RequestMapping(value = "/{param}/{token}")
