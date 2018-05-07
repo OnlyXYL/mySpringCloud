@@ -1,17 +1,8 @@
-package xyl.bmsmart.service_zuul.service_zuul.exception;
-
+package xyl.bmsmart.web.web.exception;
 
 import xyl.bmsmart.common.common.model.JsonResult;
 
-/**
- * 自定义系统异常
- *
- * @param
- * @author XiaYaLing
- * @date 2018/4/25
- * @return
- */
-public class SystemException extends RuntimeException {
+public class ErrorPageException extends RuntimeException {
     private JsonResult jsonResult;
 
     public JsonResult getJsonResult() {
@@ -22,23 +13,23 @@ public class SystemException extends RuntimeException {
         this.jsonResult = scmessage;
     }
 
-    public SystemException() {
+    public ErrorPageException() {
         super();
     }
 
-    public SystemException(String message, Throwable cause) {
+    public ErrorPageException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public SystemException(String message) {
+    public ErrorPageException(String message) {
         super(message);
     }
 
-    public SystemException(Throwable cause) {
+    public ErrorPageException(Throwable cause) {
         super(cause);
     }
 
-    public SystemException(JsonResult jsonResult) {
+    public ErrorPageException(JsonResult jsonResult) {
         super(jsonResult.getContent());
         this.jsonResult = jsonResult;
     }

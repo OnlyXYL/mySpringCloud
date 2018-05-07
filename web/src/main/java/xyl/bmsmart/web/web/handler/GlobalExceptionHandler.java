@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import xyl.bmsmart.web.web.exception.BusinessException;
+import xyl.bmsmart.web.web.exception.ErrorPageException;
 import xyl.bmsmart.web.web.exception.SystemException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,5 +39,11 @@ public class GlobalExceptionHandler {
     public Object systemErrorHandler(HttpServletRequest req, SystemException e) throws Exception {
         log.debug("---SystemException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
         return e.getJsonResult();
+    }
+
+    @ExceptionHandler(value = ErrorPageException.class)
+    public Object businessErrorHandler(HttpServletRequest req, ErrorPageException e) throws Exception {
+        log.debug("---BusinessException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
+        return "error";
     }
 }

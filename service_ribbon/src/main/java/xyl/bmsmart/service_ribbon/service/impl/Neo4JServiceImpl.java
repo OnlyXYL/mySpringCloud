@@ -34,6 +34,6 @@ public class Neo4JServiceImpl implements Neo4jService {
 
     public String someThingError() {
         log.info("something wrong in ribbon!!!");
-        return null;
+        return "something wrong in ribbon!!!";
     }
 }

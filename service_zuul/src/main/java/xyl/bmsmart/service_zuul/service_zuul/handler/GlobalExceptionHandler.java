@@ -39,4 +39,11 @@ public class GlobalExceptionHandler {
         log.debug("---SystemException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
         return e.getMessage();
     }
+
+   /* @ExceptionHandler(value = TokenException.class)
+    @ResponseBody
+    public Object systemErrorHandler(HttpServletRequest req, TokenException e) throws Exception {
+        log.debug("---SystemException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
+        return e.getMessage();
+    }*/
 }

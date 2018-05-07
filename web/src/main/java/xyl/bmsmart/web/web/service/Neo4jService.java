@@ -20,9 +20,9 @@ public class Neo4jService {
 
         String url = "";
         if (!StringUtils.isEmpty(token)) {
-            url = url +"http://service-zuul/ribbon/allData" + "?token=" + token;
+            url = url + "http://service-zuul/ribbon/allData" + "?token=" + token;
         } else {
-            url = url+ "http://service-zuul/ribbon/allData";
+            url = url + "http://service-zuul/ribbon/allData";
         }
 
         return restTemplate.getForObject(url, String.class);
@@ -30,7 +30,7 @@ public class Neo4jService {
 
     public String someThingError() {
         log.info("something wrong!!!");
-        return null;
+        return "something wrong in web!!!";
     }
 
 }
