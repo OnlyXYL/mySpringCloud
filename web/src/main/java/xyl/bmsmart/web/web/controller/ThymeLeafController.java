@@ -48,6 +48,6 @@ public class ThymeLeafController {
 
         request.setAttribute("neo4jData", neo4jData);
 
-        return "neo4j";
+        return "neo4j1";
     }
 }

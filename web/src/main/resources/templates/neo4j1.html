@@ -24,8 +24,9 @@
 
 </style>
 <body>
-<script src="../static/d3.v3.min.js"></script>
-<script>
+<script th:src="@{/js/jquery-1.7.2.js}"></script>
+<script th:src="@{/js/d3.v3.min.js}"></script>
+<script th:inline="javascript">
 
     var width = 1100,
         height = 800,
@@ -52,17 +53,56 @@
     var link = svg.selectAll(".link"),
         line_text = svg.selectAll(".linetext"),
         node = svg.selectAll(".node");
+    csh();
+   function csh() {
+       $.ajax({
+           type: "GET",
+           url: 'http://localhost:8770/thymeleaf/1/token',
+           dataType: "json",
+           success: function (data) {
+               console.log(data)
+               // root = {
+               //     "nodes" :[
+               //         {"id":"1","atom": "1", "size1": 12,"nodeName":"哈哈哈"},
+               //         {"id":"2","atom": "2", "size1": 12,"nodeName":"哈哈哈2"},
+               //         {"id":"3","atom": "3", "size1": 12,"nodeName":"哈哈哈33"},
+               //         {"id":"4","atom": "4", "size1": 14,"nodeName":"哈哈哈44"},
+               //         {"id":"5","atom": "5", "size1": 1,"nodeName":"哈哈哈55"},
+               //         {"id":"6","atom": "6", "size1": 16,"nodeName":"哈哈哈66"},
+               //         {"id":"7","atom": "7", "size1": 16,"nodeName":"哈哈哈77"},
+               //         {"id":"8","atom": "8", "size1": 1,"nodeName":"哈哈哈88"},
+               //         {"id":"9","atom": "9", "size1": 1,"nodeName":"9哈哈哈9"},
+               //         {"id":"10","atom": "10", "size1": 1,"nodeName":"0哈哈哈10"},
+               //         {"id":"11","atom": "11", "size1": 1,"nodeName":"哈哈哈111"},
+               //         {"id":"12","atom": "12", "size1": 1,"nodeName":"哈哈哈12"},
+               //         {"id":"13","atom": "13", "size1": 1,"nodeName":"哈哈哈13"},
+               //         {"id":"14","atom": "14", "size1": 1,"nodeName":"哈哈哈14"}
+               //     ],
+               //
+               //     "links" :[
+               //         {"source": "1", "target": "2",  "bond": "哈哈哈哈哈哈哈哈哈"},
+               //         {"source": "1", "target": "3",  "bond": "哈哈哈哈哈哈"},
+               //         {"source": "1", "target": "4",  "bond": "哈哈哈哈哈哈哈哈哈哈哈哈"},
+               //         {"source": "1", "target": "6",  "bond": "哈哈哈"},
+               //         {"source": "1", "target": "7",  "bond": "哈哈哈"},
+               //         {"source": "1", "target": "5",  "bond": "哈哈哈哈哈"},
+               //         {"source": "1", "target": "11", "bond": "哈哈哈"},
+               //         {"source": "1", "target": "12", "bond": "哈哈哈"},
+               //         {"source": "1", "target": "8",  "bond": "哈哈哈"},
+               //         {"source": "1", "target": "9",  "bond": "哈哈哈"},
+               //         {"source": "1", "target": "10",  "bond": "哈哈哈"},
+               //         {"source": "1", "target": "13", "bond": "哈哈哈"},
+               //         {"source": "1", "target": "13", "bond": "哈哈哈"},
+               //         {"source": "13", "target": "14", "bond": "哈哈哈"}
+               //     ]
+               // };
+               // update(0); // 传0 的时候 是初始化数据 传1 就是 点击节点增加数据
+           },
+           error: function () {
 
-    d3.json("graph.json", function(error, json) {
-        if (error) throw error;
-
-        // console.log(json)
-
-        root = json;
-
-        update(0); // 传0 的时候 是初始化数据 传1 就是 点击节点增加数据
-
-    });
+           }
+       });
+    }
 
 
     function update(num) {  //num  传0 的时候 是初始化数据 传1 就是 点击节点增加数据
