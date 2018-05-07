@@ -1,13 +1,11 @@
 spring:
-  application:
-    name: service-ribbon
   cloud:
     config:
       discovery:
         enabled: true
         serviceId: config-8888
-      server:
       label: master
+      profile: dev
 #        default-profile: dev
 #        default-label: master
       uri: http://localhost:8888/
