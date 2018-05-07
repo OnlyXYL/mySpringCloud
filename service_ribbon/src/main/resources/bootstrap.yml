@@ -1,4 +1,8 @@
 spring:
+  profiles:
+    active: dev
+  application:
+    name: service-ribbon
   cloud:
     config:
       discovery:
