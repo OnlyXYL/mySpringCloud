@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 @EnableHystrix
 @EnableHystrixDashboard
 @EnableDiscoveryClient
-@EnableAutoConfiguration(exclude = {Neo4jRepositoriesAutoConfiguration.class, Neo4jDataAutoConfiguration.class})
+@EnableAutoConfiguration
 @SpringBootApplication
 public class ServiceRibbonApplication {
 

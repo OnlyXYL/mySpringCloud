@@ -16,4 +16,6 @@ spring:
         git:
           uri: http://10.0.47.78/XiaYaLing/SpringCloudConfig.git
           search-paths: /**
+          username: XiaYaLing
+          password: xia18811599806
       label: master
