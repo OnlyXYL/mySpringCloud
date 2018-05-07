@@ -7,8 +7,9 @@ spring:
         enabled: true
         serviceId: config-8888
       server:
-        default-profile: dev
-        default-label: master
+      label: master
+#        default-profile: dev
+#        default-label: master
       uri: http://localhost:8888/
 
 
