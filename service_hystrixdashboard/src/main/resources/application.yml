@@ -6,7 +6,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.1.115:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 
   # 这只为prefer ip的话可以直接展示ip地址
   instance:

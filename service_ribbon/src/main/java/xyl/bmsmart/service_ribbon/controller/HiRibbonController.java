@@ -16,7 +16,7 @@ public class HiRibbonController {
     @Resource
     HiRibbonService hiRibbonService;
 
-    @Value("${cloud}")
+//    @Value("${cloud}")
     String cloud;
 
     @RequestMapping(value = "/hi/{param}")
