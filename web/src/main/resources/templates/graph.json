@@ -1,0 +1,45 @@
+{
+  "name": "flare",
+  "children": [
+    {
+      "name": "analytics",
+      "children": [
+        {
+          "name": "cluster",
+          "children": [
+            {"name": "AgglomerativeCluster", "size": 3938},
+            {"name": "CommunityStructure", "size": 3812},
+            {"name": "HierarchicalCluster", "size": 6714},
+            {"name": "MergeEdge", "size": 743}
+          ]
+        },
+        {
+          "name": "graph",
+          "children": [
+            {"name": "赌东道赌东道赌东道赌东道赌东道赌东道赌东道赌东道赌东道赌东道赌东道赌东道赌东道", "size": 3534},
+            {"name": "LinkDistance", "size": 5731},
+            {"name": "MaxFlowMinCut", "size": 7840},
+            {"name": "ShortestPaths", "size": 5914},
+            {"name": "SpanningTree", "size": 3416}
+          ]
+        },
+        {
+          "name": "optimization",
+          "children": [
+            {"name": "AspectRatioBanker", "size": 7074}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "333",
+      "children": [
+        {"name": "dddd", "size": 3634},
+        {"name": "cccc", "size": 57831},
+        {"name": "sssss", "size": 7640},
+        {"name": "33333", "size": 5314},
+        {"name": "444", "size": 3426}
+      ]
+    }
+  ]
+}
