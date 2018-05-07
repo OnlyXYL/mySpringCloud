@@ -46,37 +46,37 @@ public class CypherResultUtil {
                             String next = iterator.next();
                             if (LabelType.Basin.getValue().equals(next)) {
                                 //盆地
-                                node1.setName(id + "");
+                                node1.setId(id + "");
                                 node1.setNodeName(node.get("name").asString());
                                 node1.setLabel(next);
                             } else if (LabelType.First.getValue().equals(next)) {
                                 //一级构造
-                                node1.setName(id + "");
+                                node1.setId(id + "");
                                 node1.setNodeName(node.get("name").asString());
                                 node1.setLabel(next);
                             } else if (LabelType.Second.getValue().equals(next)) {
                                 //二级构造
-                                node1.setName(id + "");
+                                node1.setId(id + "");
                                 node1.setNodeName(node.get("name").asString());
                                 node1.setLabel(next);
                             } else if (LabelType.Third.getValue().equals(next)) {
                                 //三级构造
-                                node1.setName(id + "");
+                                node1.setId(id + "");
                                 node1.setNodeName(node.get("name").asString());
                                 node1.setLabel(next);
                             } else if (LabelType.Part.getValue().equals(next)) {
                                 //局部构造
-                                node1.setName(id + "");
+                                node1.setId(id + "");
                                 node1.setNodeName(node.get("name").asString());
                                 node1.setLabel(next);
                             } else if (LabelType.City.getValue().equals(next)) {
                                 //城市
-                                node1.setName(id + "");
+                                node1.setId(id + "");
                                 node1.setNodeName(node.get("name").asString());
                                 node1.setLabel(next);
                             } else if (LabelType.Type.getValue().equals(next)) {
                                 //城市分类
-                                node1.setName(id + "");
+                                node1.setId(id + "");
                                 node1.setNodeName(node.get("CityTypeName").asString());
                                 node1.setLabel(next);
                             }

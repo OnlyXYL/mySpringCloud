@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class Node implements Serializable {
 
-    private String name;
+    private String id;
     private String nodeName;
     private String tagline;
     private Integer released;
@@ -19,17 +19,17 @@ public class Node implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Node person = (Node) o;
+        Node node = (Node) o;
 
-        if (!name.equals(person.name)) return false;
-        return name.equals(person.name);
+        if (!id.equals(node.id)) return false;
+        return id.equals(node.id);
 
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + name.hashCode();
+        int result = id.hashCode();
+        result = 31 * result + id.hashCode();
         return result;
     }
 }
