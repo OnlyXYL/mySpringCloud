@@ -1,3 +1,9 @@
+spring:
+  application:
+    name: service-ribbon
+server:
+  port: 8764
+
 eureka:
   client:
     serviceUrl:
@@ -5,8 +11,11 @@ eureka:
   # 这只为prefer ip的话可以直接展示ip地址
   instance:
     prefer-ip-address: true
-server:
-  port: 8764
-spring:
-  application:
-    name: service-ribbon
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream,info,health
+
+

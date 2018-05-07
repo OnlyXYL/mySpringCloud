@@ -22,20 +22,12 @@ import org.springframework.stereotype.Component;
  * @ConfigurationProperties 注解可以把properties文件转化为bean，然后使用 @Component 注解把该bean注入到IOC容器中
  */
 @ConfigurationProperties(prefix = "remote", ignoreUnknownFields = false)
-@PropertySource(value = "classpath:remote.properties", encoding = "utf-8")
+@PropertySource(value = {"classpath:remote.properties"}, encoding = "utf-8")
 @Data
 @Component
 public class RemoteProperties {
 
-//    @Resource
-//    private MessageUtil messageUtil;
-
     private String notFoundUser;
     private String businessErrorMsg;
     private String sysErrorMsg;
-
-//    private RemoteProperties() {
-//        MessageUtil.loadProperty(this);
-//    }
-
 }

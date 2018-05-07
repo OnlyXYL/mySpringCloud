@@ -9,6 +9,14 @@ import xyl.bmsmart.service_neo4j.service_neo4j.service.neo4j.CityAndTypeService;
 
 import javax.annotation.Resource;
 
+/**
+ * neo4j原始服务
+ *
+ * @param
+ * @author XiaYaLing
+ * @date 2018/4/26
+ * @return
+ */
 @RestController
 @Slf4j
 public class neo4jController {
