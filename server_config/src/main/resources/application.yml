@@ -15,5 +15,5 @@ spring:
       server:
         git:
           uri: http://10.0.47.78/XiaYaLing/SpringCloudConfig.git
-          search-paths: /
+          search-paths: /**
       label: master
