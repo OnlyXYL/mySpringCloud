@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<title>可以展开</title>
+<title>可以展开http://localhost:8770/thymeleaf/page/neo4j</title>
 <meta charset="utf-8">
 <style>
 
@@ -28,8 +28,9 @@
 <script th:src="@{/js/d3.v3.min.js}"></script>
 <script th:inline="javascript">
 
-    var width = 1100,
-        height = 800,
+    var width = 1000,
+        height = 600,
+        radius = 6,
         root={};
     var nodes=[]
     var links=[]
@@ -39,7 +40,7 @@
 
     var force = d3.layout.force()
         .linkDistance(200)	//指定连线长度
-        .charge(-800)	//相互之间的作用力
+        .charge(-50)	//相互之间的作用力
         .gravity(.05)
         .size([width, height])
         .on("tick", tick)
@@ -60,43 +61,9 @@
            url: 'http://localhost:8770/thymeleaf/1/token',
            dataType: "json",
            success: function (data) {
-               console.log(data)
-               // root = {
-               //     "nodes" :[
-               //         {"id":"1","atom": "1", "size1": 12,"nodeName":"哈哈哈"},
-               //         {"id":"2","atom": "2", "size1": 12,"nodeName":"哈哈哈2"},
-               //         {"id":"3","atom": "3", "size1": 12,"nodeName":"哈哈哈33"},
-               //         {"id":"4","atom": "4", "size1": 14,"nodeName":"哈哈哈44"},
-               //         {"id":"5","atom": "5", "size1": 1,"nodeName":"哈哈哈55"},
-               //         {"id":"6","atom": "6", "size1": 16,"nodeName":"哈哈哈66"},
-               //         {"id":"7","atom": "7", "size1": 16,"nodeName":"哈哈哈77"},
-               //         {"id":"8","atom": "8", "size1": 1,"nodeName":"哈哈哈88"},
-               //         {"id":"9","atom": "9", "size1": 1,"nodeName":"9哈哈哈9"},
-               //         {"id":"10","atom": "10", "size1": 1,"nodeName":"0哈哈哈10"},
-               //         {"id":"11","atom": "11", "size1": 1,"nodeName":"哈哈哈111"},
-               //         {"id":"12","atom": "12", "size1": 1,"nodeName":"哈哈哈12"},
-               //         {"id":"13","atom": "13", "size1": 1,"nodeName":"哈哈哈13"},
-               //         {"id":"14","atom": "14", "size1": 1,"nodeName":"哈哈哈14"}
-               //     ],
-               //
-               //     "links" :[
-               //         {"source": "1", "target": "2",  "bond": "哈哈哈哈哈哈哈哈哈"},
-               //         {"source": "1", "target": "3",  "bond": "哈哈哈哈哈哈"},
-               //         {"source": "1", "target": "4",  "bond": "哈哈哈哈哈哈哈哈哈哈哈哈"},
-               //         {"source": "1", "target": "6",  "bond": "哈哈哈"},
-               //         {"source": "1", "target": "7",  "bond": "哈哈哈"},
-               //         {"source": "1", "target": "5",  "bond": "哈哈哈哈哈"},
-               //         {"source": "1", "target": "11", "bond": "哈哈哈"},
-               //         {"source": "1", "target": "12", "bond": "哈哈哈"},
-               //         {"source": "1", "target": "8",  "bond": "哈哈哈"},
-               //         {"source": "1", "target": "9",  "bond": "哈哈哈"},
-               //         {"source": "1", "target": "10",  "bond": "哈哈哈"},
-               //         {"source": "1", "target": "13", "bond": "哈哈哈"},
-               //         {"source": "1", "target": "13", "bond": "哈哈哈"},
-               //         {"source": "13", "target": "14", "bond": "哈哈哈"}
-               //     ]
-               // };
-               // update(0); // 传0 的时候 是初始化数据 传1 就是 点击节点增加数据
+               console.log(data);
+               root = data;
+               update(0); // 传0 的时候 是初始化数据 传1 就是 点击节点增加数据
            },
            error: function () {
 
@@ -113,8 +80,8 @@
             var linkGroup = {};
             //对连接线进行统计和分组，不区分连接线的方向，只要属于同两个实体，即认为是同一组
             var linkmap = {}
-            for(var i=0; i<root.links.length; i++){
-                var key = root.links[i].source<root.links[i].target?root.links[i].source+':'+root.links[i].target:root.links[i].target+':'+root.links[i].source;
+            for(var i=0; i<root.edges.length; i++){
+                var key = root.edges[i].source<root.edges[i].target?root.edges[i].source+':'+root.edges[i].target:root.edges[i].target+':'+root.edges[i].source;
                 if(!linkmap.hasOwnProperty(key)){
                     linkmap[key] = 0;
                 }
@@ -122,12 +89,12 @@
                 if(!linkGroup.hasOwnProperty(key)){
                     linkGroup[key]=[];
                 }
-                linkGroup[key].push(root.links[i]);
+                linkGroup[key].push(root.edges[i]);
             }
             //为每一条连接线分配size属性，同时对每一组连接线进行编号
-            for(var i=0; i<root.links.length; i++){
-                var key = root.links[i].source<root.links[i].target?root.links[i].source+':'+root.links[i].target:root.links[i].target+':'+root.links[i].source;
-                root.links[i].size = linkmap[key];
+            for(var i=0; i<root.edges.length; i++){
+                var key = root.edges[i].source<root.edges[i].target?root.edges[i].source+':'+root.edges[i].target:root.edges[i].target+':'+root.edges[i].source;
+                root.edges[i].size = linkmap[key];
                 //同一组的关系进行编号
                 var group = linkGroup[key];
                 var keyPair = key.split(':');
@@ -139,7 +106,7 @@
                 setLinkNumber(group,type);
             }
 
-            root.links.forEach(function(e) {
+            root.edges.forEach(function(e) {
                 var linknum=e.linknum
                 var size=e.size
                 var sourceNode = root.nodes.filter(function(n) {
@@ -154,7 +121,7 @@
                     target: targetNode,
                     linknum:linknum,
                     size:size,
-                    bond: e.bond
+                    text: e.text
                 });
             });
             // console.log(links)
@@ -212,7 +179,7 @@
                     target: targetNode,
                     linknum:linknum,
                     size:size,
-                    bond: e.bond
+                    text: e.text
                 });
             });
 //            newlinks=[]
@@ -287,7 +254,7 @@
             .attr({'class':'linetext',
                 'id':function(d,i){return 'linetextpath'+i;},
                 'dx':function(d){
-                    const textLength = d.bond.length;
+                    const textLength = d.text.length;
                     const deviation = 100; // 调整误差
                     const dx = deviation-(textLength * 12) / 2+10 ;
                     // console.log(dx)
@@ -300,7 +267,7 @@
             .append('textPath')
             .attr('xlink:href',function(d,i) {return '#link'+i})
             .style("pointer-events", "none")
-            .text(function(d){return d.bond;});
+            .text(function(d){return d.text;});
 
         // Update nodes.
         node = node.data(nodes);
@@ -309,7 +276,7 @@
 
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
-            .on("click", click)
+            // .on("click", click)
             .style('z-index',100)
             .call(force.drag)
 
@@ -319,12 +286,12 @@
         //鼠标移入圆圈的提示文字
         nodeEnter.append("svg:title")
             .text(function(node) {
-                return node.atom
+                return node.nodeName
             });
         nodeEnter.append("text")
             .attr("dy", ".35em")
             .text(function(d) {
-                return d.atom
+                return d.nodeName
                 // return d.name.length > 4 ? d.name.substring(0, 4) + '...': d.name
             });
 
@@ -338,37 +305,37 @@
 
     // Toggle on click.
 
-    function click(d) {
-
-        if (d3.event.defaultPrevented) return;
-
-        let obj={
-            nodes: [{"id":"15","atom": "15", "size1": 1,"nodeName":"114"},{"id":"16","atom": "16", "size1": 1,"nodeName":"114"}],
-            links:[{"source": "14", "target": "15", "bond": "哈哈哈"},{"source": "14", "target": "16", "bond": "哈哈哈11"}]
-        };
-
-        let hasid=false;
-
-        obj.nodes.forEach(function (e) {
-            if(idarr.indexOf(e.id)!==-1){
-                hasid=true
-                return false
-
-            }else {
-                idarr.push(e.id);
-                console.log(e);
-                newnodes.push(e)
-            }
-
-        })
-        if(!hasid){
-            obj.links.forEach(function (el) {
-                newlinks.push(el)
-            })
-            update(1);
-}
-
-    }
+//     function click(d) {
+//
+//         if (d3.event.defaultPrevented) return;
+//
+//         let obj={
+//             nodes: [{"id":"15","nodeName": "15", "size1": 1,"nodeName":"114"},{"id":"16","nodeName": "16", "size1": 1,"nodeName":"114"}],
+//             links:[{"source": "14", "target": "15", "text": "哈哈哈"},{"source": "14", "target": "16", "text": "哈哈哈11"}]
+//         };
+//
+//         let hasid=false;
+//
+//         obj.nodes.forEach(function (e) {
+//             if(idarr.indexOf(e.id)!==-1){
+//                 hasid=true
+//                 return false
+//
+//             }else {
+//                 idarr.push(e.id);
+//                 console.log(e);
+//                 newnodes.push(e)
+//             }
+//
+//         })
+//         if(!hasid){
+//             obj.links.forEach(function (el) {
+//                 newlinks.push(el)
+//             })
+//             update(1);
+// }
+//
+//     }
 
     function tick() {
         link.attr("d", function(d) {
