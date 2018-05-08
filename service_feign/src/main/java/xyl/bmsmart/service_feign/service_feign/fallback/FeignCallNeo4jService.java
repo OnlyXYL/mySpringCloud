@@ -7,6 +7,21 @@ import xyl.bmsmart.service_feign.service_feign.service.CallNeo4jService;
 public class FeignCallNeo4jService implements CallNeo4jService {
     @Override
     public String getNeo4jData() {
-        return null;
+        return "sorry,someThing wrong!";
+    }
+
+    @Override
+    public String getMovieInfoByTitle(String title) {
+        return "sorry,someThing wrong!" + title;
+    }
+
+    @Override
+    public String getMovieInfoByName(String name) {
+        return "sorry,someThing wrong!" + name;
+    }
+
+    @Override
+    public String queryNodeById(String label, String id) {
+        return "sorry,someThing wrong!" + label + id;
     }
 }

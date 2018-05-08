@@ -1,5 +1,6 @@
 package xyl.bmsmart.common.common.util;
 
+import com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBaseIterators;
 import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Value;
 import org.neo4j.driver.v1.types.Node;
@@ -21,7 +22,7 @@ public class CypherResultUtil {
      * @author XiaYaLing
      * @date 2018/4/18
      */
-    public static ResultData  dealwithResult(List<Record> greeting) {
+    public static ResultData dealwithResult(List<Record> greeting) {
         ArrayList<xyl.bmsmart.common.common.model.neo4j.Node> nodes = new ArrayList<>();
         List<Relationship> edges = new ArrayList<>();
         List<String> relationShips = new ArrayList<>();
@@ -78,6 +79,16 @@ public class CypherResultUtil {
                                 //城市分类
                                 node1.setId(id + "");
                                 node1.setNodeName(node.get("CityTypeName").asString());
+                                node1.setLabel(next);
+                            } else if (LabelType.Person.getValue().equals(next)) {
+                                //演员
+                                node1.setId(id + "");
+                                node1.setNodeName(node.get("name").asString());
+                                node1.setLabel(next);
+                            } else if (LabelType.Movie.getValue().equals(next)) {
+                                //电影
+                                node1.setId(id + "");
+                                node1.setNodeName(node.get("title").asString());
                                 node1.setLabel(next);
                             }
                             nodes.add(node1);
