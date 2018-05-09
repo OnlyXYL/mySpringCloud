@@ -10,3 +10,13 @@ server:
 spring:
   application:
     name: service-8762
+# mysql 属性配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.0.47.52:3306/bmsmartsc2db?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: Bmsmart2017
+
+
+
+logging.level.org.springframework: info

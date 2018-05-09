@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyl.bmsmart.service_provider.mapper.user.UserMapper">
+    <!--
+        namespace：必须与对应的接口全类名一致
+        id:必须与对应接口的某个对应的方法名一致
+
+     -->
+    <select id="getUser" parameterType="java.util.HashMap" resultType="xyl.bmsmart.common.common.model.SCUser">
+		SELECT  * FROM  scUser su WHERE su.userId = #{userId}
+	</select>
+</mapper>
