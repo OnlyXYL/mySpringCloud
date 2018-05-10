@@ -14,6 +14,16 @@ spring:
 # mysql 属性配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.0.47.52:3306/bmsmartsc2db?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    url: jdbc:mysql://localhost:3306/bmsmartsc2db?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
     username: root
-    password: Bmsmart2017
+    password: root
+  redis:
+    host: 10.0.47.51
+    port: 6379
+    timeout: 1800
+    jedis:
+      pool:
+        max-active: 20
+        min-idle: 10
+        max-idle: 15
+        max-wait: 60000

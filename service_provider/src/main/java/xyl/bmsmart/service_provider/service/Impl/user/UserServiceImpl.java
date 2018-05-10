@@ -26,4 +26,17 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, SCUser> impleme
         log.info(":::inter " + this.getClass().getName() + ":::方法:::" + Thread.currentThread().getStackTrace()[1].getMethodName() + ":::参数:::map," + map.toString());
         return baseMapper.getUser(map);
     }
+
+    /**
+     * 更新用户
+     *
+     * @param map
+     * @return int
+     * @author XiaYaLing
+     * @date 2018/5/10
+     */
+    @Override
+    public int updateUser(Map<String, String> map) {
+        return baseMapper.updateUser(map);
+    }
 }

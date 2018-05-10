@@ -9,4 +9,8 @@
     <select id="getUser" parameterType="java.util.HashMap" resultType="xyl.bmsmart.common.common.model.SCUser">
 		SELECT  * FROM  scUser su WHERE su.userId = #{userId}
 	</select>
+    
+    <update id="updateUser" parameterType="java.util.HashMap">
+        update scUser set name = #{name} where userId = #{userId}
+    </update>
 </mapper>
