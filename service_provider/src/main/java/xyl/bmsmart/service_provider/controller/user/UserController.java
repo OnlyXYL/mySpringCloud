@@ -1,6 +1,9 @@
 package xyl.bmsmart.service_provider.controller.user;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.conn.util.PublicSuffixList;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import xyl.bmsmart.common.common.model.SCUser;
 import xyl.bmsmart.service_provider.controller.BaseController;
 import xyl.bmsmart.service_provider.exception.BusinessException;
+import xyl.bmsmart.service_provider.service.redis.SessionRedisCacheService;
 import xyl.bmsmart.service_provider.service.user.UserService;
 import xyl.bmsmart.service_provider.util.MessageUtil;
 
@@ -22,8 +26,11 @@ public class UserController extends BaseController {
     @Resource
     UserService userService;
 
+    @Resource
+    private SessionRedisCacheService sessionRedisCacheService;
+
     /**
-     * 根据条件查询用户信息
+     * 根据条件查询用户信息(集群模型)
      *
      * @param param
      * @return java.lang.String
@@ -31,6 +38,7 @@ public class UserController extends BaseController {
      * @date 2018/5/9
      */
     @RequestMapping(value = "/{param}")
+    @Cacheable(cacheNames = "user_common", cacheManager = "modelSingleRedisCacheManager", keyGenerator = "singleModelKeyGenerator")
     public String getUser(@PathVariable("param") String param) {
 
         log.info("\n:::调用xml方式和的mybatis\n");
@@ -43,5 +51,42 @@ public class UserController extends BaseController {
             SCUser user = userService.getUser(map);
             return user.toString();
         }
+    }
+
+
+    /**
+     * 更新
+     *
+     * @param name
+     * @param userId
+     * @return java.lang.String
+     * @author XiaYaLing
+     * @date 2018/5/10
+     */
+    @CacheEvict(cacheNames = "user_common", allEntries = true)
+    @RequestMapping(value = "/{userId}/{name}")
+    public String updateUser(@PathVariable("name") String name, @PathVariable("userId") String userId) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        log.info("\n执行查询");
+
+        SCUser user = userService.getUser(map);
+
+        log.info("\n查询结果：" + user.toString());
+
+        map.remove("userId");
+        map.put("name", name);
+        map.put("userId", user.getUserId());
+        log.info("\n执行更新");
+        int result = userService.updateUser(map);
+        log.info("\n执行更新结果：" + result);
+
+        map.clear();
+        map.put("userId", user.getUserId());
+        SCUser user1 = userService.getUser(map);
+
+        log.info("\n更新之后执行查询：" + user1.toString());
+
+        return user1.toString();
     }
 }

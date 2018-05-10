@@ -2,6 +2,9 @@ package xyl.bmsmart.service_provider;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
@@ -12,7 +15,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 //@EnableEurekaClient
 @EnableDiscoveryClient
-@SpringBootApplication
+@SpringBootApplication(exclude = {RedisAutoConfiguration.class,RedisReactiveAutoConfiguration.class,RedisRepositoriesAutoConfiguration.class})
 public class ServiceProviderApplication {
 
     public static void main(String[] args) {

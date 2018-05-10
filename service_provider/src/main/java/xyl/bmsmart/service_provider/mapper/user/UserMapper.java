@@ -18,4 +18,13 @@ public interface UserMapper extends BaseMapper<SCUser> {
      */
     SCUser getUser(Map<String, String> map);
 
+    /**
+     * 更新用户
+     *
+     * @param map
+     * @return int
+     * @author XiaYaLing
+     * @date 2018/5/10
+     */
+    int updateUser(Map<String, String> map);
 }
