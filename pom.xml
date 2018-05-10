@@ -45,6 +45,7 @@
         <druid.version>1.0.12</druid.version>
         <fastjson.version>1.2.6</fastjson.version>
         <neo4j.driver.version>1.5.2</neo4j.driver.version>
+        <jedis.version>2.9.0</jedis.version>
     </properties>
 
     <dependencyManagement>
