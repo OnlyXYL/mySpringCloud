@@ -17,4 +17,6 @@ public interface IUserService {
     List<User> findAllUsers();
 
     int insertUser(User user);
+
+    int updateUser(User user);
 }

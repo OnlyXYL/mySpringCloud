@@ -2,6 +2,7 @@ package xyl.bmsmart.service_provider_2.mapper.user;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import xyl.bmsmart.service_provider_2.model.User;
 
 import java.util.List;
@@ -24,4 +25,7 @@ public interface UserMapper {
 
     @Insert("INSERT INTO user(username, name, age, balance) VALUES(#{username}, #{name}, #{age}, #{balance})")
     int insertUser(User user);
+
+    @Update("update scUser set name = #{name} where userId = #{userId}")
+    int updataUser(User user);
 }
