@@ -46,12 +46,6 @@ public class JedisConnectionFactoryConfig {
     @Resource(name = "sessionRedisClusterConfiguration")
     private RedisClusterConfiguration sessionRedisClusterConfiguration;
 
-    @Value("${redis.model.expireTime}")
-    private int modelExpireTime;
-
-    @Value("${redis.session.expireTime}")
-    private int sessionExpireTime;
-
   /*  @Value("${redis.model.password}")
     private String modelPassword;*/
 

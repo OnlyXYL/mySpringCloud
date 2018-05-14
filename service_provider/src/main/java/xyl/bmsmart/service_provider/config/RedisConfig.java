@@ -1,6 +1,7 @@
 package xyl.bmsmart.service_provider.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -8,18 +9,19 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
+import java.time.Duration;
 
 @Configuration
 @EnableCaching//启动缓存
+@PropertySource({"classpath:redis_model.properties", "classpath:redis_session.properties"})
 @Slf4j
 public class RedisConfig extends CachingConfigurerSupport {
 
@@ -35,6 +37,29 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Resource(name = "sessionConnectionFactoryCluster")
     private JedisConnectionFactory sessionConnectionFactoryCluster;
 
+    @Value("${redis.model.expireTime}")
+    private long modelExpireTime;
+
+    @Value("${redis.session.expireTime}")
+    private long sessionExpireTime;
+
+
+    /**
+     * 获取redisCacheManager
+     *
+     * @param time                   过期时间
+     * @param redisConnectionFactory 连接工厂
+     * @return org.springframework.data.redis.cache.RedisCacheManager
+     * @author XiaYaLing
+     * @date 2018/5/14
+     */
+    public RedisCacheManager getRedisCacheManager(long time, RedisConnectionFactory redisConnectionFactory) {
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(time));
+        RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(redisCacheConfiguration);
+        RedisCacheManager modelClusterRedisCacheManager = builder.build();
+        return modelClusterRedisCacheManager;
+    }
+
     /**
      * 单节点模型缓存管理类
      *
@@ -46,7 +71,11 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean(name = "modelSingleRedisCacheManager")
     public CacheManager modelSingleRedisCacheManager() {
         log.info("\n初始化 CacheManager...\n");
-        RedisCacheManager modelSingleRedisCacheManager = RedisCacheManager.create(modelConnectionFactorySingle);
+        /**
+         * 调用方法获取redisCacheManager
+         */
+        RedisCacheManager modelSingleRedisCacheManager = this.getRedisCacheManager(modelExpireTime, modelConnectionFactorySingle);
+//        RedisCacheManager modelSingleRedisCacheManager = RedisCacheManager.create(modelConnectionFactorySingle);
         return modelSingleRedisCacheManager;
     }
 
@@ -62,7 +91,12 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean(name = "modelClusterRedisCacheManager")
     public CacheManager modelClusterRedisCacheManager() {
         log.info("\n初始化 CacheManager...\n");
-        RedisCacheManager modelClusterRedisCacheManager = RedisCacheManager.create(modelConnectionFactoryCluster);
+
+        /**
+         * 调用方法获取redisCacheManager
+         */
+        RedisCacheManager modelClusterRedisCacheManager = this.getRedisCacheManager(modelExpireTime, modelConnectionFactoryCluster);
+
         return modelClusterRedisCacheManager;
     }
 
@@ -77,7 +111,11 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean(name = "sessionSingleRedisCacheManager")
     public CacheManager sessionSingleRedisCacheManager() {
         log.info("\n初始化 CacheManager...\n");
-        RedisCacheManager sessionSingleRedisCacheManager = RedisCacheManager.create(sessionConnectionFactorySingle);
+//        RedisCacheManager sessionSingleRedisCacheManager = RedisCacheManager.create(sessionConnectionFactorySingle);
+        /**
+         * 调用方法获取redisCacheManager
+         */
+        RedisCacheManager sessionSingleRedisCacheManager = this.getRedisCacheManager(sessionExpireTime, sessionConnectionFactorySingle);
         return sessionSingleRedisCacheManager;
     }
 
@@ -92,7 +130,11 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean(name = "sessionClusterRedisCacheManager")
     public CacheManager sessionClusterRedisCacheManager() {
         log.info("\n初始化 CacheManager...\n");
-        RedisCacheManager sessionClusterRedisCacheManager = RedisCacheManager.create(sessionConnectionFactoryCluster);
+        /**
+         * 调用方法获取redisCacheManager
+         */
+        RedisCacheManager sessionClusterRedisCacheManager = this.getRedisCacheManager(sessionExpireTime, sessionConnectionFactoryCluster);
+//        RedisCacheManager sessionClusterRedisCacheManager = RedisCacheManager.create(sessionConnectionFactoryCluster);
         return sessionClusterRedisCacheManager;
     }
 
