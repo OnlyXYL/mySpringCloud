@@ -38,7 +38,7 @@ public class UserController extends BaseController {
      * @date 2018/5/9
      */
     @RequestMapping(value = "/{param}")
-    @Cacheable(cacheNames = "user_common", cacheManager = "modelSingleRedisCacheManager", keyGenerator = "singleModelKeyGenerator")
+    @Cacheable(cacheNames = "user_common", cacheManager = "sessionSingleRedisCacheManager", keyGenerator = "singleSessionKeyGenerator")
     public String getUser(@PathVariable("param") String param) {
 
         log.info("\n:::调用xml方式和的mybatis\n");
