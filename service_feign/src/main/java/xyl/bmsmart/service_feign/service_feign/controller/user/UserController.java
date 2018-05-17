@@ -19,7 +19,13 @@ public class UserController {
     @RequestMapping(value = "/user/{param}")
     public String getUserByParm(@PathVariable("param") String param) {
 
-        String user = callUserService.getUser(param);
+        String user = null;
+        try {
+            user = callUserService.getUser(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info(e.getMessage());
+        }
 
         return user;
     }

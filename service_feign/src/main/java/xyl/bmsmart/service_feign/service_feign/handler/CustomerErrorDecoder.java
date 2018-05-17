@@ -1,5 +1,6 @@
 package xyl.bmsmart.service_feign.service_feign.handler;
 
+import com.netflix.hystrix.exception.HystrixBadRequestException;
 import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
@@ -15,7 +16,8 @@ public class CustomerErrorDecoder implements ErrorDecoder {
 
     @Override
     public Exception decode(String methodKey, Response response) {
-        CIBaseException ex = null;
+        log.info("+++++++++++++ErrorDecoder+++++++++++");
+        Exception ex = null;
         try {
             if (response.body() != null) {
                 String body = Util.toString(response.body().asReader());
@@ -28,14 +30,15 @@ public class CustomerErrorDecoder implements ErrorDecoder {
                 //异常编码
                 String error = exceptionInfo.getError();
 
-                ex = new CIBaseException(CIBaseException.BIZ_EXCEPTION, error, message);
+//                ex = new CIBaseException(CIBaseException.BIZ_EXCEPTION, error, message);
+                ex =  new HystrixBadRequestException(message);
             }
         } catch (IOException var4) {
             var4.printStackTrace();
             ex = new CIBaseException(CIBaseException.UNKNOWN_EXCEPTION, "", "系统运行异常");
         }
 
-        return null != ex ? ex : new CIBaseException(CIBaseException.UNKNOWN_EXCEPTION, "", "系统运行异常");
+        return null != ex ? ex : new HystrixBadRequestException("系统运行异常");
 
     }
 
