@@ -18,6 +18,12 @@
 	</parent>
 
 	<dependencies>
+		<!--common-->
+		<dependency>
+			<groupId>xyl.bmsmart.common</groupId>
+			<artifactId>common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 		<!--web-->
 		<dependency>

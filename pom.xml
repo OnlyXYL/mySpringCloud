@@ -46,6 +46,7 @@
         <fastjson.version>1.2.6</fastjson.version>
         <neo4j.driver.version>1.5.2</neo4j.driver.version>
         <jedis.version>2.9.0</jedis.version>
+        <net-json.version>2.4</net-json.version>
     </properties>
 
     <dependencyManagement>
@@ -98,6 +99,14 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
             <scope>true</scope>
+        </dependency>
+
+        <!--json-lib-->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>${net-json.version}</version>
+            <classifier>jdk15</classifier>
         </dependency>
     </dependencies>
 

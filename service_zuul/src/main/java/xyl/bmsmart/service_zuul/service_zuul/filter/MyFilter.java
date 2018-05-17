@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.async.WebAsyncUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.util.WebUtils;
+import xyl.bmsmart.common.common.exception.CIBaseException;
 import xyl.bmsmart.service_zuul.service_zuul.config.RemoteProperties;
 import xyl.bmsmart.service_zuul.service_zuul.exception.TokenException;
 
@@ -47,69 +48,31 @@ import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 @Slf4j
 public class MyFilter extends ZuulFilter {
 
-    private static final String RESPONSE_KEY_TOKEN = "token";
-    @Value("${system.config.authFilter.authUrl}")
-    private String authUrl;
-    @Value("${system.config.authFilter.tokenKey}")
-    private String tokenKey = RESPONSE_KEY_TOKEN;
-
-    @Resource
-    RemoteProperties remoteProperties;
 
     @Override
     public String filterType() {
-        return FilterConstants.PRE_TYPE;
-
+        return "error";
     }
 
     @Override
     public int filterOrder() {
-        return FilterConstants.SEND_RESPONSE_FILTER_ORDER - 2;
+        return 10;
     }
 
     @Override
     public boolean shouldFilter() {
-        /**
-         * 过滤条件,满足条件才会执行过滤，可用于对需要登陆的服务请求进行过滤，判断是否登陆
-         */
-        RequestContext context = getCurrentContext();
-        String url = context.getRequest().getRequestURI().toString();
-        boolean contains = authUrl.contains(context.getRequest().getRequestURI().toString());
-        if (contains) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
     @Override
-    public Object run() throws ZuulException {
-
-        String token = remoteProperties.getToken();
-
-        log.info("token:" + token);
-
-        RequestContext ctx = getCurrentContext();
-
-        HttpServletRequest request = ctx.getRequest();
-        log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
-        Object accessToken = request.getParameter("token");
-        if (!token.equals(accessToken)) {
-//            throw new IllegalArgumentException("token is error");
-            log.info("######### token is error ##########");
-            ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(401);
-//            ctx.setResponseBody("{\"result\":\"token is error!\"}");
-//            ctx.setThrowable(new Throwable("token is error"));
-            try {
-                ctx.getResponse().getWriter().write("######### token is error ##########");
-            } catch (Exception e) {
-            }
-
-            return null;
-        }
-        log.info("######### ok ##########");
+    public Object run() {
+        log.info("zuul抛出异常");
+        RequestContext ctx = RequestContext.getCurrentContext();
+        Throwable throwable = ctx.getThrowable();
+        log.error("this is a ErrorFilter : {}", throwable.getCause().getMessage());
+        ctx.set("error.status_code", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        ctx.set("error.exception", throwable.getCause());
         return null;
-
     }
+
 }

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import xyl.bmsmart.common.common.exception.CIBaseException;
 import xyl.bmsmart.service_feign.service_feign.service.CallUserService;
 
 import javax.annotation.Resource;

@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import xyl.bmsmart.common.common.exception.CIBaseException;
 import xyl.bmsmart.common.common.model.SCUser;
 import xyl.bmsmart.service_provider.controller.BaseController;
 import xyl.bmsmart.service_provider.exception.BusinessException;
@@ -49,7 +50,11 @@ public class UserController extends BaseController {
             HashMap<String, String> map = new HashMap<>();
             map.put("userId", param);
             SCUser user = userService.getUser(map);
-            return user.toString();
+            if (user==null) {
+                throw new CIBaseException("用户不存在");//该用户不存在
+            }else {
+                return user.toString();
+            }
         }
     }
 

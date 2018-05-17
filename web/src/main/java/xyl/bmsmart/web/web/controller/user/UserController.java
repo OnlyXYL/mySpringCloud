@@ -19,7 +19,13 @@ public class UserController {
     @RequestMapping(value = "/{param}")
     public String getUser(@PathVariable("param") String param) {
 
-        String userByParm = feignUserService.getUserByParm(param);
+        String userByParm = null;
+        try {
+            userByParm = feignUserService.getUserByParm(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info(e.getMessage());
+        }
         return userByParm;
     }
 }
