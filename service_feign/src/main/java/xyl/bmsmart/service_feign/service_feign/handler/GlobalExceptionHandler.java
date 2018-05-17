@@ -1,15 +1,11 @@
-package xyl.bmsmart.web.web.handler;
+package xyl.bmsmart.service_feign.service_feign.handler;
 
 import com.netflix.hystrix.exception.HystrixRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import xyl.bmsmart.common.common.exception.CIBaseException;
-import xyl.bmsmart.web.web.exception.BusinessException;
-import xyl.bmsmart.web.web.exception.ErrorPageException;
-import xyl.bmsmart.web.web.exception.SystemException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,26 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = BusinessException.class)
-    @ResponseBody
-    public Object businessErrorHandler(HttpServletRequest req, BusinessException e) throws Exception {
-        log.debug("---BusinessException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
-        return e.getJsonResult();
-    }
-
-    @ExceptionHandler(value = SystemException.class)
-    @ResponseBody
-    public Object systemErrorHandler(HttpServletRequest req, SystemException e) throws Exception {
-        log.debug("---SystemException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
-        return e.getJsonResult();
-    }
-
-    @ExceptionHandler(value = ErrorPageException.class)
-    public Object businessErrorHandler(HttpServletRequest req, ErrorPageException e) throws Exception {
-        log.debug("---BusinessException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
-        return "error";
-    }
-
     @ExceptionHandler(value = CIBaseException.class)
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
 
@@ -64,15 +40,17 @@ public class GlobalExceptionHandler {
 
         if (rex instanceof CIBaseException) {
 
-            CIBaseException cbe = (CIBaseException) rex;
-           /* if (StringUtils.isBlank(cbe.getErrCode())
+       CIBaseException cbe = (CIBaseException) rex;
+            String message = cbe.getMessage();
+            log.info(message);
+               /*  if (StringUtils.isBlank(cbe.getErrCode())
                     && cbe.getMessage().matches(this.errCodePattern)) {
                 String[] cm = this.parseCodeMessage(cbe.getMessage());
                 this.writeError(cm[0], cm[1], httpServletResponse);
             } else {
                 this.writeError(cbe.getErrCode(), rex.getMessage(), httpServletResponse);
-            }*/
-
+            }
+*/
         } else {
 //            this.writeError("", "系统运行出错", httpServletResponse);
         }
