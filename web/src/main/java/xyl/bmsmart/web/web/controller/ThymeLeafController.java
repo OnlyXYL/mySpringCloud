@@ -6,16 +6,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import xyl.bmsmart.common.common.model.neo4j.ResultData;
+import xyl.bmsmart.common.common.exception.ErrorPageException;
 import xyl.bmsmart.web.web.config.RemoteProperties;
-import xyl.bmsmart.web.web.exception.BusinessException;
-import xyl.bmsmart.web.web.exception.ErrorPageException;
 import xyl.bmsmart.web.web.service.FeignNeo4jService;
 import xyl.bmsmart.web.web.service.Neo4jService;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = "/thymeleaf")

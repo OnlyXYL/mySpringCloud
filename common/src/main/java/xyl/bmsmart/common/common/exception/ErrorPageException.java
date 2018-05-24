@@ -1,8 +1,8 @@
-package xyl.bmsmart.service_zuul.service_zuul.exception;
+package xyl.bmsmart.common.common.exception;
 
 import xyl.bmsmart.common.common.model.JsonResult;
 
-public class TokenException extends RuntimeException {
+public class ErrorPageException extends RuntimeException {
     private JsonResult jsonResult;
 
     public JsonResult getJsonResult() {
@@ -13,23 +13,23 @@ public class TokenException extends RuntimeException {
         this.jsonResult = scmessage;
     }
 
-    public TokenException() {
+    public ErrorPageException() {
         super();
     }
 
-    public TokenException(String message, Throwable cause) {
+    public ErrorPageException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public TokenException(String message) {
+    public ErrorPageException(String message) {
         super(message);
     }
 
-    public TokenException(Throwable cause) {
+    public ErrorPageException(Throwable cause) {
         super(cause);
     }
 
-    public TokenException(JsonResult jsonResult) {
+    public ErrorPageException(JsonResult jsonResult) {
         super(jsonResult.getContent());
         this.jsonResult = jsonResult;
     }

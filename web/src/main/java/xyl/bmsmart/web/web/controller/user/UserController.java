@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import xyl.bmsmart.common.common.model.JsonResult;
 import xyl.bmsmart.web.web.service.user.FeignUserService;
 
 import javax.annotation.Resource;
@@ -19,13 +20,15 @@ public class UserController {
     @RequestMapping(value = "/{param}")
     public String getUser(@PathVariable("param") String param) {
 
-        String userByParm = null;
+        JsonResult jsonResult = new JsonResult();
         try {
-            userByParm = feignUserService.getUserByParm(param);
+            String userByParm = feignUserService.getUserByParm(param);
+            jsonResult.success("操作成功",userByParm);
         } catch (Exception e) {
-            e.printStackTrace();
-            log.info(e.getMessage());
+            log.info("Exception:\ncause," + e.getCause() + "\nmessage," + e.getMessage());
+            jsonResult.error(e.getMessage(), null);
+            return jsonResult.toString();
         }
-        return userByParm;
+        return jsonResult.toString();
     }
 }
