@@ -1,4 +1,4 @@
-package xyl.bmsmart.service_provider.exception;
+package xyl.bmsmart.common.common.exception;
 
 
 import xyl.bmsmart.common.common.model.JsonResult;

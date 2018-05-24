@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import xyl.bmsmart.service_zuul.service_zuul.exception.BusinessException;
-import xyl.bmsmart.service_zuul.service_zuul.exception.SystemException;
+import xyl.bmsmart.common.common.exception.BusinessException;
+import xyl.bmsmart.common.common.exception.SystemException;
 
 import javax.servlet.http.HttpServletRequest;
 /**
@@ -39,11 +39,4 @@ public class GlobalExceptionHandler {
         log.debug("---SystemException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
         return e.getMessage();
     }
-
-   /* @ExceptionHandler(value = TokenException.class)
-    @ResponseBody
-    public Object systemErrorHandler(HttpServletRequest req, TokenException e) throws Exception {
-        log.debug("---SystemException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
-        return e.getMessage();
-    }*/
 }

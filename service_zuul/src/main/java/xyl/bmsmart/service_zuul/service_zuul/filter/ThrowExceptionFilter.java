@@ -2,31 +2,12 @@ package xyl.bmsmart.service_zuul.service_zuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
-import org.springframework.cloud.netflix.zuul.util.ZuulRuntimeException;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.async.WebAsyncUtils;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.util.WebUtils;
-import xyl.bmsmart.common.common.exception.CIBaseException;
-import xyl.bmsmart.service_zuul.service_zuul.config.RemoteProperties;
-import xyl.bmsmart.service_zuul.service_zuul.exception.TokenException;
 
-import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.ResponseWrapper;
-
-import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 
 /**
- * zuul服务过滤
+ * zuul服务过滤，需要返回zuul层异常时需要
  *
  * @param
  * @author XiaYaLing
@@ -44,10 +25,9 @@ import static com.netflix.zuul.context.RequestContext.getCurrentContext;
  * shouldFilter：这里可以写逻辑判断，是否要过滤，本文true,永远过滤。
  * run：过滤器的具体逻辑。可用很复杂，包括查sql，nosql去判断该请求到底有没有权限访问。
  */
-@Component
+//@Component
 @Slf4j
-public class MyFilter extends ZuulFilter {
-
+public class ThrowExceptionFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
@@ -74,5 +54,4 @@ public class MyFilter extends ZuulFilter {
         ctx.set("error.exception", throwable.getCause());
         return null;
     }
-
 }

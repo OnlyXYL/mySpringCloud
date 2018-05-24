@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import xyl.bmsmart.service_provider.exception.BusinessException;
-import xyl.bmsmart.service_provider.exception.SystemException;
+import xyl.bmsmart.common.common.exception.BusinessException;
+import xyl.bmsmart.common.common.exception.SystemException;
 
 import javax.servlet.http.HttpServletRequest;
 /**

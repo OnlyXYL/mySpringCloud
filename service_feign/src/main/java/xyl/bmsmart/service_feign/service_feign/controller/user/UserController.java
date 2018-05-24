@@ -1,5 +1,6 @@
 package xyl.bmsmart.service_feign.service_feign.controller.user;
 
+import com.netflix.hystrix.exception.HystrixBadRequestException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,13 @@ public class UserController {
         try {
             user = callUserService.getUser(param);
         } catch (Exception e) {
+            //向上抛出，feign中捕获到的服务中异常
             e.printStackTrace();
-            log.info(e.getMessage());
+            if (e instanceof HystrixBadRequestException) {
+                log.info("HystrixBadRequestException," + "message:" + e.getMessage() + "cause," + e.getCause());
+                throw e;
+            }
         }
-
         return user;
     }
 }

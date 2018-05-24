@@ -12,6 +12,14 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * zuul层熔断时需要
+ *
+ * @param
+ * @author XiaYaLing
+ * @date 2018/5/24
+ * @return
+ */
 //@Component
 @Slf4j
 public class ZuulFallBack implements FallbackProvider {

@@ -4,11 +4,11 @@ import org.springframework.stereotype.Component;
 import xyl.bmsmart.service_feign.service_feign.service.CallServiceHiService;
 
 /**
- * CallServiceHiService 熔断输出类
+ * 调用服务的方法进行降级处理
  *
  * @param
  * @author XiaYaLing
- * @date 2018/5/2
+ * @date 2018/5/24
  * @return
  */
 @Component

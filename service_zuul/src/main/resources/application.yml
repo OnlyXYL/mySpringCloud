@@ -19,6 +19,7 @@ zuul:
       path: /feign/**
       serviceId: service-feign
 
+zuul.SendErrorFilter.post.disable: true
 
 system.config.authFilter.authUrl: /thymeleaf,/ribbon/allData
 system.config.authFilter.tokenKey: token

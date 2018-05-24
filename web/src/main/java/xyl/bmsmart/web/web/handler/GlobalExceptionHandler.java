@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import xyl.bmsmart.common.common.exception.BusinessException;
 import xyl.bmsmart.common.common.exception.CIBaseException;
-import xyl.bmsmart.web.web.exception.BusinessException;
-import xyl.bmsmart.web.web.exception.ErrorPageException;
-import xyl.bmsmart.web.web.exception.SystemException;
+import xyl.bmsmart.common.common.exception.ErrorPageException;
+import xyl.bmsmart.common.common.exception.SystemException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
