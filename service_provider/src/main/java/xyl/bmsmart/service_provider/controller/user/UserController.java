@@ -2,6 +2,7 @@ package xyl.bmsmart.service_provider.controller.user;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class UserController extends BaseController {
      * @date 2018/5/9
      */
     @RequestMapping(value = "/{param}")
-//    @Cacheable(cacheNames = "user_common", cacheManager = "sessionSingleRedisCacheManager", keyGenerator = "singleSessionKeyGenerator")
+    @Cacheable(cacheNames = "user_common", cacheManager = "sessionSingleRedisCacheManager", keyGenerator = "singleSessionKeyGenerator")
     public String getUser(@PathVariable("param") String param) {
 
         log.info("\n:::调用xml方式和的mybatis\n");
@@ -48,10 +49,10 @@ public class UserController extends BaseController {
             HashMap<String, String> map = new HashMap<>();
             map.put("userId", param);
             SCUser user = userService.getUser(map);
-            if (user==null) {
+            if (user == null) {
                 throw new CIBaseException("用户不存在");//该用户不存在
 //                throw new HystrixBadRequestException("用户不存在");//该用户不存在
-            }else {
+            } else {
                 return user.toString();
             }
         }

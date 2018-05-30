@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import xyl.bmsmart.common.common.model.neo4j.ResultData;
-import xyl.bmsmart.common.common.myenum.LabelType;
-import xyl.bmsmart.service_neo4j.service_neo4j.service.neo4j.CityAndTypeService;
 import xyl.bmsmart.service_neo4j.service_neo4j.service.neo4j.MovieAndPersonService;
+import xyl.bmsmart.service_neo4j.service_neo4j.service.neo4j.CityAndTypeService;
 
 import javax.annotation.Resource;
 
