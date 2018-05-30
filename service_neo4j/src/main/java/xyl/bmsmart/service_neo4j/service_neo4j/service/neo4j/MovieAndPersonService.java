@@ -1,9 +1,6 @@
 package xyl.bmsmart.service_neo4j.service_neo4j.service.neo4j;
 
-import org.neo4j.driver.v1.Record;
 import xyl.bmsmart.common.common.model.neo4j.ResultData;
-
-import java.util.List;
 
 /**
  * 电影相关数据接口

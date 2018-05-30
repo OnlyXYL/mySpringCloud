@@ -1,0 +1,33 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  # 这只为prefer ip的话可以直接展示ip地址
+  instance:
+    prefer-ip-address: true
+server:
+  port: 8763
+spring:
+  application:
+    name: service-8762
+# mysql 属性配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.0.47.52:3306/bmsmartsc2db?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: Bmsmart2017
+  redis:
+    host: 10.0.47.51
+    port: 6379
+    timeout: 1800
+    jedis:
+      pool:
+        max-active: 20
+        min-idle: 10
+        max-idle: 15
+        max-wait: 60000
+    cluster:
+      nodes: 192.168.1.128:7001,192.168.1.128:7002,192.168.1.128:7003,192.168.1.129:7004,192.168.1.129:7005,192.168.1.129:7006
+
+
+logging.level.org.springframework: info

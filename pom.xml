@@ -16,6 +16,7 @@
         <module>service_feign</module>
         <module>service_hystrixdashboard</module>
         <module>service_neo4j</module>
+        <module>service_dgraph</module>
         <module>service_provider</module>
         <module>service_provider_2</module>
         <module>service_ribbon</module>

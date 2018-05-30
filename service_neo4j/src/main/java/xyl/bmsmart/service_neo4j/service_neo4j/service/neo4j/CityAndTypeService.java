@@ -1,7 +1,6 @@
 package xyl.bmsmart.service_neo4j.service_neo4j.service.neo4j;
 
 
-import xyl.bmsmart.common.common.model.neo4j.Node;
 import xyl.bmsmart.common.common.model.neo4j.ResultData;
 
 public interface CityAndTypeService {
