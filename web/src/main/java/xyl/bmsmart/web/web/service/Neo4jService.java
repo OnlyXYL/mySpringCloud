@@ -44,7 +44,7 @@ public class Neo4jService {
         return restTemplate.getForObject(url, String.class);
     }
 
-    public String someThingError() {
+    public String someThingError(String token) {
         log.info("something wrong!!!");
         return "something wrong in web!!!";
     }

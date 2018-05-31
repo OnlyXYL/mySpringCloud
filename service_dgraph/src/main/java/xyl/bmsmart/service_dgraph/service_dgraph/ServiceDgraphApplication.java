@@ -1,4 +1,4 @@
-package xyl.bmsmart.service_neo4j.service_neo4j;
+package xyl.bmsmart.service_dgraph.service_dgraph;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

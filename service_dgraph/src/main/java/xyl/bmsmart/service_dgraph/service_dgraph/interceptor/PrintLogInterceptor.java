@@ -1,4 +1,4 @@
-package xyl.bmsmart.service_neo4j.service_neo4j.interceptor;
+package xyl.bmsmart.service_dgraph.service_dgraph.interceptor;
 
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
