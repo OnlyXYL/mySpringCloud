@@ -52,13 +52,7 @@ public class ThymeLeafController {
     @ResponseBody
     public String hello(@PathVariable("param") String param, @PathVariable("token") String token) {
 
-        String neo4jData = "";
-        try {
-            neo4jData = neo4jService.getNeo4jData(token);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ErrorPageException("something wrong !!!");
-        }
+        String neo4jData = neo4jService.getNeo4jData(token);
 
         log.info("neo4jData" + neo4jData);
 

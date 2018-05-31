@@ -1,4 +1,4 @@
-package xyl.bmsmart.service_neo4j.service_neo4j.controller;
+package xyl.bmsmart.service_dgraph.service_dgraph.controller;
 
 import com.google.gson.Gson;
 import com.google.protobuf.ByteString;

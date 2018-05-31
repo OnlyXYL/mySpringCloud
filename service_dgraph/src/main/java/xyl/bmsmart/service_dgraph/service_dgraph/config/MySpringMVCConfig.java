@@ -1,9 +1,9 @@
-package xyl.bmsmart.service_neo4j.service_neo4j.config;
+package xyl.bmsmart.service_dgraph.service_dgraph.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import xyl.bmsmart.service_neo4j.service_neo4j.interceptor.PrintLogInterceptor;
+import xyl.bmsmart.service_dgraph.service_dgraph.interceptor.PrintLogInterceptor;
 
 @Configuration
 public class MySpringMVCConfig implements WebMvcConfigurer {
