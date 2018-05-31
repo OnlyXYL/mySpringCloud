@@ -1,6 +1,3 @@
-spring:
-  application:
-    name: service-ribbon
 server:
   port: 8764
 

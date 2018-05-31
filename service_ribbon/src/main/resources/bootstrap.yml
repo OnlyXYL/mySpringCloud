@@ -1,12 +1,13 @@
-#spring:
-#  profiles:
-#    active: dev
-#  cloud:
-#    config:
-#      discovery:
-#        enabled: true
-#        serviceId: config-8888
-#      name: service-ribbon
-#      profile: dev
-#      uri: http://localhost:8888/
-#      label: master
+spring:
+  profiles:
+    active: dev
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: config-8888
+      uri: http://localhost:8888/
+      profile: dev
+      label: master
+  application:
+    name: service-ribbon
