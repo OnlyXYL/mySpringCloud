@@ -23,6 +23,8 @@
         <module>service_zipkin</module>
         <module>service_zuul</module>
         <module>web</module>
+        <module>service_kafka_producer</module>
+        <module>service_kafka_consumer</module>
     </modules>
 
     <parent>
