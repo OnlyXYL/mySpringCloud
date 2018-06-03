@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import xyl.bmsmart.common.common.exception.ErrorPageException;
 import xyl.bmsmart.web.web.config.RemoteProperties;
 import xyl.bmsmart.web.web.service.FeignNeo4jService;
 import xyl.bmsmart.web.web.service.Neo4jService;
